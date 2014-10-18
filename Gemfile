@@ -18,4 +18,7 @@ gem 'jquery-rails'
 # Wikipedia API client
 gem 'wikipedia-client'
 
+# Flickr API client
+gem 'flickraw'
+
 gem 'spring', group: :development

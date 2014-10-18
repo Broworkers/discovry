@@ -41,6 +41,7 @@ GEM
     coffee-script-source (1.8.0)
     erubis (2.7.0)
     execjs (2.2.2)
+    flickraw (0.9.8)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -120,6 +121,7 @@ PLATFORMS
 DEPENDENCIES
   bourbon
   coffee-rails (~> 4.0.0)
+  flickraw
   haml-rails
   jquery-rails
   neat
