@@ -13,6 +13,7 @@
       %p= format_result(@content)
   %section.flickr
     %header.powered-by Flickr
-    %ul.photos
-      - @photos.each do |photo_url|
-        %li= image_tag photo_url
+    - if @photos
+      %ul.photos
+        - @photos.each do |photo_url|
+          %li= image_tag photo_url
