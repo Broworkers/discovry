@@ -8,6 +8,10 @@ class WikipediaSearch
     populate
   end
 
+  def available?
+    summary.present?
+  end
+
   def populate
     @content = query_endpoint(@place)
     @pageinfo = query_pageurl

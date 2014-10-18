@@ -5,6 +5,6 @@ class FlickrSearch
     flickr
       .photos
       .search(text: place, sort: 'relevance', per_page: 20)
-      .collect { |photo| [FlickRaw.url_t(photo), FlickRaw.url(photo)] }
+      .collect { |photo| [FlickRaw.url_s(photo), FlickRaw.url(photo)] }
   end
 end
