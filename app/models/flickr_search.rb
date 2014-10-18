@@ -1,6 +1,10 @@
+require 'flickraw'
+
 class FlickrSearch
   def self.get_photos(place)
-    discovered_pictures = flickr.photos.search(text: place, sort: 'relevance')
-    discovered_pictures.collect { |photo| FlickRaw.url(photo) }
+    flickr
+      .photos
+      .search(text: place, sort: 'relevance', per_page: 20)
+      .collect { |photo| [FlickRaw.url_s(photo), FlickRaw.url(photo)] }
   end
 end

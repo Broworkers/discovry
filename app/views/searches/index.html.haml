@@ -8,13 +8,13 @@
 
   %section.wikipedia
     %header.powered-by Wikipedia
-    - if @page
-      %h1= @page.title
-      %p= format_result(@content)
+    - if @article.available?
+      %h1= link_to @article.title, @article.url, target: '_blank'
+      %p= raw @article.summary
   %section.flickr
     %header.powered-by Flickr
     - if @photos
       %ul.photos
-        - @photos.each do |photo_url|
-          %li(style="background-image: url(#{photo_url})")
-            %a(href="#")
+        - @photos.each do |thumb, url|
+          %li(style="background-image: url(#{thumb})")
+            = link_to '', url, target: '_blank'
