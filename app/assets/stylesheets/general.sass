@@ -1,0 +1,71 @@
+// Main elements
+
+.map,
+.content
+  left: 0
+  overflow: hidden
+  position: absolute
+  right: 0
+
+
+// Map
+
+.map
+  background-color: $light
+  bottom: 300px
+  top: 0
+
+
+// Content
+
+.content
+  bottom: 0
+  box-shadow: 0 -5px 5px rgba($black, .1)
+  height: 300px
+  +clearfix
+
+  section
+    float: left
+    height: 100%
+    padding: $buffer
+
+    header.powered-by
+      color: $gray
+      font-size: .8em
+      margin-bottom: 1em
+
+
+// Wikipedia
+
+section.wikipedia
+  width: 300px
+
+  h1
+    font-size: 1em
+
+  p
+    font-size: .9em
+
+
+// Flickr
+
+section.flickr
+  width: 500px
+
+  ul
+    align:
+      content: space-between
+      items: flex-start
+    display: flex
+    flex:
+      direction: row
+      wrap: wrap
+    margin: 0
+    padding: 0
+    justify-content: space-between
+    list-style: none
+
+  img
+    display: block
+    margin-bottom: 1em
+    +size(100px)
