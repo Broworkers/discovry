@@ -3,7 +3,7 @@ class SearchesController < ApplicationController
 
   def index
     if search = params[:place]
-      @article = WikipediaSearch.get_info(current_lang, search)
+      @article = WikipediaSearch.new(current_lang, search)
       @photos  = FlickrSearch.get_photos(search)
     end
   end
