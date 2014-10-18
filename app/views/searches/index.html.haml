@@ -1,0 +1,9 @@
+= form_tag searches_path, method: :get do
+  = text_field_tag :place
+  = submit_tag
+
+
+- if @page
+  %h1= @page.title
+
+  %p= format_result(@content)
