@@ -22,7 +22,8 @@ class WikipediaSearch
   end
 
   def summary
-    result["extract"].gsub(/\(.*\)/, '').gsub(/ +, +/, ', ')
+    summary = result["extract"]
+    (summary || "").gsub(/\(.*\)/, '').gsub(/ +, +/, ', ')
   end
 
   def result
