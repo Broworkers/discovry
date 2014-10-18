@@ -20,7 +20,12 @@ gem 'rest-client'
 # Flickr API client
 gem 'flickraw'
 
-# ENV variables
-gem 'dotenv-rails', :groups => [:development, :test]
+group :development do
+  # ENV variables
+  gem 'dotenv-rails'
+
+  # Debug
+  gem 'pry'
+end
 
 gem 'spring', group: :development
