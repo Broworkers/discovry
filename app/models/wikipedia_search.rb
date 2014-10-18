@@ -22,7 +22,7 @@ class WikipediaSearch
   end
 
   def summary
-    result["extract"].gsub(/\(.*\)/, '')
+    result["extract"].gsub(/\(.*\)/, '').gsub(/ +, +/, ', ')
   end
 
   def result
