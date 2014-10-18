@@ -5,16 +5,4 @@
     = text_field_tag :place
     = submit_tag
 
-  %section.wikipedia
-    %header.powered-by Wikipedia
-    - if @article && @article.available?
-      %h1= link_to @article.title, @article.url, target: '_blank'
-      = raw @article.summary
-
-  %section.flickr
-    %header.powered-by Flickr
-    - if @photos
-      %ul.photos
-        - @photos.each do |thumb, url|
-          %li
-            = link_to '', url, target: '_blank', style: "background-image: url(#{thumb})"
+  = render 'info'

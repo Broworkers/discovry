@@ -6,6 +6,10 @@ class SearchesController < ApplicationController
       @article = WikipediaSearch.new(current_lang, search)
       @photos  = FlickrSearch.get_photos(search)
     end
+
+    if request.xhr?
+      render 'info'
+    end
   end
 
   def current_lang
