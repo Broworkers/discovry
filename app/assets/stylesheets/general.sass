@@ -32,13 +32,13 @@
     header.powered-by
       color: $gray
       font-size: .8em
-      margin-bottom: 1em
+      margin-bottom: $buffer / 2
 
 
 // Wikipedia
 
 section.wikipedia
-  width: 300px
+  width: 400px
 
   h1
     font-size: 1em
@@ -50,25 +50,34 @@ section.wikipedia
 // Flickr
 
 section.flickr
-  width: 500px
+  width: calc(100% - 400px)
 
   ul
     align:
-      content: space-between
+      content: stretch
       items: flex-start
     display: flex
+    height: 210px
     flex:
       direction: row
       wrap: wrap
     margin: 0
+    overflow: hidden
     padding: 0
     justify-content: space-between
     list-style: none
 
-  img
+  li
+    background-size: cover
+    margin: 2px
+
+  a
     display: block
-    margin-bottom: 1em
     +size(100px)
+
+    &:hover,
+    &:focus
+      background-color: rgba($blue, .3)
 
 
 // Temporary form positioning
