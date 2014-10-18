@@ -1,4 +1,5 @@
 require 'wikipedia'
+require 'flickraw'
 
 class SearchesController < ApplicationController
   def index
@@ -7,6 +8,7 @@ class SearchesController < ApplicationController
       Wikipedia.Configure { domain "#{lang}.wikipedia.org" }
       @page = Wikipedia.find(search)
       @content = @page.sanitized_content
+      @photos = FlickrSearch.get_photos(search)
     end
   end
 end
