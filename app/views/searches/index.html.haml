@@ -16,4 +16,5 @@
     - if @photos
       %ul.photos
         - @photos.each do |photo_url|
-          %li= image_tag photo_url
+          %li(style="background-image: url(#{photo_url})")
+            %a(href="#")
