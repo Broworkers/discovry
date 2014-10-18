@@ -14,11 +14,5 @@
   %section.flickr
     %header.powered-by Flickr
     %ul.photos
-      %li= image_tag "thumb.jpg"
-      %li= image_tag "thumb.jpg"
-      %li= image_tag "thumb.jpg"
-      %li= image_tag "thumb.jpg"
-      %li= image_tag "thumb.jpg"
-      %li= image_tag "thumb.jpg"
-      %li= image_tag "thumb.jpg"
-      %li= image_tag "thumb.jpg"
+      - @photos.each do |photo_url|
+        %li= image_tag photo_url
