@@ -22,7 +22,7 @@ class WikipediaSearch
   end
 
   def summary
-    result["extract"]
+    result["extract"].gsub(/\(.*\)/, '').gsub(/ +, +/, ', ')
   end
 
   def result
@@ -47,7 +47,7 @@ class WikipediaSearch
   end
 
   def query_endpoint(place)
-    get("http://#{@lang}.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=#{place}")
+    get("http://#{@lang}.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=#{place}&exsentences=2&redirects=")
   end
 
   def get(url)
