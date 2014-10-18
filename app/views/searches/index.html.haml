@@ -15,5 +15,5 @@
     %header.powered-by Flickr
     - if @photos
       %ul.photos
-        - @photos.each do |photo_url|
-          %li= image_tag photo_url
+        - @photos.each do |thumb, url|
+          %li= link_to image_tag(thumb), url, target: '_blank'
