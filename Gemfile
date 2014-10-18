@@ -21,4 +21,7 @@ gem 'wikipedia-client'
 # Flickr API client
 gem 'flickraw'
 
+# ENV variables
+gem 'dotenv-rails', :groups => [:development, :test]
+
 gem 'spring', group: :development
