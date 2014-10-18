@@ -18,7 +18,4 @@ gem 'jquery-rails'
 # Wikipedia API client
 gem 'wikipedia-client'
 
-# x-wiki parser
-gem 'wikicloth'
-
 gem 'spring', group: :development
