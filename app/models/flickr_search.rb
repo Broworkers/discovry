@@ -1,3 +1,5 @@
+require 'flickraw'
+
 class FlickrSearch
   def self.get_photos(place)
     flickr

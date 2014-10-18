@@ -8,9 +8,9 @@
 
   %section.wikipedia
     %header.powered-by Wikipedia
-    - if @page
-      %h1= @page.title
-      %p= format_result(@content)
+    - if @article
+      %h1= @article.title
+      %p= format_result(@article.content)
   %section.flickr
     %header.powered-by Flickr
     - if @photos
