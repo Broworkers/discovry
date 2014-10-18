@@ -15,6 +15,18 @@
   bottom: 300px
   top: 0
 
+  // Spotlight
+  &:before
+    +radial-gradient(50px at 50% 50%, rgba($black, 0) 49px, rgba($black, .3) 50px)
+    bottom: 0
+    content: ""
+    left: 0
+    pointer-events: none
+    position: absolute
+    right: 0
+    top: 0
+    z-index: 100
+
 
 // Content
 
@@ -38,6 +50,7 @@
 // Wikipedia
 
 section.wikipedia
+  position: relative
   width: 400px
 
   h1
@@ -46,6 +59,18 @@ section.wikipedia
   p
     font-size: .9em
 
+    // Fade out big paragraphs
+    &:after
+      +linear-gradient(top, rgba($white, 0) 0%, rgba($white, 1) 50%)
+      bottom: 0
+      content: ""
+      display: block
+      height: 60px
+      left: 0
+      pointer-events: none
+      position: absolute
+      right: 0
+
 
 // Flickr
 
@@ -53,31 +78,29 @@ section.flickr
   width: calc(100% - 400px)
 
   ul
-    align:
-      content: stretch
-      items: flex-start
-    display: flex
+    +align-content(stretch)
+    +align-items(flex-start)
+    +display(flex)
+    +flex-direction(row)
+    +flex-wrap(wrap)
+    +justify-content(space-between)
     height: 210px
-    flex:
-      direction: row
-      wrap: wrap
     margin: 0
     overflow: hidden
     padding: 0
-    justify-content: space-between
     list-style: none
 
   li
-    background-size: cover
     margin: 2px
 
   a
+    background-size: cover
     display: block
     +size(100px)
 
     &:hover,
     &:focus
-      background-color: rgba($blue, .3)
+      box-shadow: inset 0 0 0 2px $black, inset 0 0 0 4px $white
 
 
 // Temporary form positioning

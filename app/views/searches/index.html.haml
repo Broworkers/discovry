@@ -9,11 +9,12 @@
     %header.powered-by Wikipedia
     - if @article && @article.available?
       %h1= link_to @article.title, @article.url, target: '_blank'
-      %p= raw @article.summary
+      = raw @article.summary
+
   %section.flickr
     %header.powered-by Flickr
     - if @photos
       %ul.photos
         - @photos.each do |thumb, url|
-          %li(style="background-image: url(#{thumb})")
-            = link_to '', url, target: '_blank'
+          %li
+            = link_to '', url, target: '_blank', style: "background-image: url(#{thumb})"
