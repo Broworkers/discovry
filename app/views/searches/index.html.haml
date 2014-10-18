@@ -16,4 +16,5 @@
     - if @photos
       %ul.photos
         - @photos.each do |thumb, url|
-          %li= link_to image_tag(thumb), url, target: '_blank'
+          %li(style="background-image: url(#{thumb})")
+            = link_to '', url, target: '_blank'
