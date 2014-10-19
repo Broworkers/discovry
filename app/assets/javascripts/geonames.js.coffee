@@ -31,16 +31,36 @@ initialize = (position) ->
   clean = ->
     $('.summary').html('')
     $('.title').html('')
+    $('.photos').html('')
 
   google.maps.event.addListener map, 'dragstart', clean
   google.maps.event.addListener map, 'dragend', updateMap
   google.maps.event.addListener map, 'zoom_changed', updateMap
 
   update = (data) ->
-    console.log(data)
-    if data.summary isnt null
-      $('.summary').text(data.summary)
-      link = $('<a>').attr('href', data.wikipediaUrl).text(data.title)
-      $('.title').append(link)
+    renderWikipedia(data)
+
+  renderFlickr = (data) ->
+    photos = data.photos
+
+    $('.photos').html('')
+
+    for photo in photos
+      a = $('<a>').attr
+        target: '_blank'
+        href: photo.url
+        target: '_blank'
+        style: "background-image: url(#{photo.thumb})"
+      li = $('<li>').append a
+
+      $('.photos').append(li)
+
+
+  renderWikipedia = (data) ->
+    renderFlickr(data)
+    if data.wikipedia.summary isnt null
+      $('.summary').text(data.wikipedia.summary)
+      link = $('<a>').attr('href', data.wikipedia.url).text(data.wikipedia.title)
+      $('.title').html(link)
 
 $(initialize)

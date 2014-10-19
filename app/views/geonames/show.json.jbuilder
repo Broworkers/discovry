@@ -3,9 +3,10 @@ json.wikipedia do |wiki|
   wiki.title @geoname.title
   wiki.url @geoname.wikipediaUrl
 end
-json.photos do |photo|
-  @photos.each do |thumb, url|
-    photo.thumb thumb
-    photo.url url
+
+json.photos do
+  json.array! @photos do |photo|
+    json.thumb photo[0]
+    json.url photo[1]
   end
 end
