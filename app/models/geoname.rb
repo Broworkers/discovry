@@ -56,11 +56,11 @@ class Geoname < OpenStruct
 
     def level
       case
-      when zoom > 16
+      when zoom > 15
         :wiki
-      when zoom > 12
+      when zoom > 10
         :locality
-      when zoom > 3
+      when zoom > 6
         :region
       else
         :country
@@ -138,11 +138,11 @@ class Geoname < OpenStruct
     def feature
       case level
       when :locality
-        { featureClass: 'A', featureCode: 'ADM2' }
+        { featureCode: 'ADM2' }
       when :region
-        { featureClass: 'A', featureCode: 'ADM1' }
+        { featureCode: 'ADM1' }
       when :country
-        { featureClass: 'A', featureCode: 'PCLI' }
+        { featureCode: 'PCLI' }
       end
     end
 
