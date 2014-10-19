@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
     end
 
     if request.xhr?
-      render 'info'
+      render partial: 'info'
     end
   end
 
