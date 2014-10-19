@@ -2,7 +2,7 @@
 %html
 
   %head
-    %title Discover
+    %title Discovry
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&sensor=TRUE", "application"
     = csrf_meta_tags
@@ -11,6 +11,6 @@
     = link_to image_tag("rails-rumble-badge-2014.png", alt: "Rails Rumble 2014"), "http://railsrumble.com/entries/156-discovry", target: "_blank", class: "rails-rumble-badge"
 
     %header.site-top
-      = image_tag "logo.svg", alt: "Discover", class: "logo"
+      = image_tag "logo.svg", alt: "Discovry", class: "logo"
 
     %div.wrapper= yield
