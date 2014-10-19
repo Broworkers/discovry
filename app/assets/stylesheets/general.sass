@@ -4,6 +4,18 @@ body
   font-family: $font
 
 
+// Rails Rumble Badge
+
+.rails-rumble-badge
+  position: absolute
+  right: $buffer
+  top: $buffer
+  z-index: 300
+
+  img
+    height: 50px
+
+
 // Header
 
 .site-top
@@ -31,7 +43,7 @@ body
 
 .map
   background-color: $light
-  bottom: 300px
+  bottom: 284px
   top: 0
 
   // Spotlight
@@ -56,7 +68,7 @@ body
   +justify-content(space-between)
   bottom: 0
   box-shadow: 0 -5px 5px rgba($black, .1)
-  height: 300px
+  height: 284px
   +clearfix
 
   section
