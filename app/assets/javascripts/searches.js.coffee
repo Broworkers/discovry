@@ -18,6 +18,7 @@ initialize = ->
     mapTypeControl: false
     streetViewControl: false
     panControl: false
+    zoomControl: false
     center: new google.maps.LatLng(-23.554113,-46.641769)
     mapTypeId: google.maps.MapTypeId.ROADMAP
     zoom: 8
