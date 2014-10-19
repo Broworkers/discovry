@@ -1,1 +1,1 @@
-json.(@geoname, :summary)
+json.(@geoname, :summary, :title, :wikipediaUrl)
