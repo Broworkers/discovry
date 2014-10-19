@@ -29,15 +29,18 @@ initialize = (position) ->
   setTimeout updateMap, 500
 
   clean = ->
-    $('p.summary').text('')
+    $('.summary').html('')
+    $('.title').html('')
 
   google.maps.event.addListener map, 'dragstart', clean
   google.maps.event.addListener map, 'dragend', updateMap
   google.maps.event.addListener map, 'zoom_changed', updateMap
 
-  update = (points) ->
-    console.log(points)
-    if points.summary isnt null
-      $('p.summary').text(points.summary)
+  update = (data) ->
+    console.log(data)
+    if data.summary isnt null
+      $('.summary').text(data.summary)
+      link = $('<a>').attr('href', data.wikipediaUrl).text(data.title)
+      $('.title').append(link)
 
 $(initialize)
