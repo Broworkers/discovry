@@ -2,7 +2,7 @@
 %html
 
   %head
-    %title Discover
+    %title Discovry
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&sensor=TRUE", "application"
     = csrf_meta_tags
@@ -10,6 +10,6 @@
   %body
 
     %header.site-top
-      = image_tag "logo.svg", alt: "Discover", class: "logo"
+      = image_tag "logo.svg", alt: "Discovry", class: "logo"
 
     %div.wrapper= yield
