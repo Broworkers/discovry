@@ -1,3 +1,1 @@
-@geonames.each do |geoname|
-  json[geoname, :lat, :lng]
-end
+json.array! @geonames, :name, :lat, :lng, :population
