@@ -4,6 +4,7 @@ ruby '2.1.3'
 gem 'rails', '4.1.1'
 gem 'pg'
 
+gem 'jbuilder'
 gem 'haml-rails'
 gem 'sass-rails'
 gem 'bourbon'

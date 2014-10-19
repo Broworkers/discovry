@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root 'searches#index'
+  root 'geonames#show'
 end
