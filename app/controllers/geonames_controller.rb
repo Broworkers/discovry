@@ -4,6 +4,9 @@ class GeonamesController < ApplicationController
       @geoname = Geoname.search(coords, zoom)
       @photos  = FlickrSearch.get_photos(@geoname.title)
     end
+  rescue
+    @geoname ||= []
+    @photos  ||= []
   end
 
   private
