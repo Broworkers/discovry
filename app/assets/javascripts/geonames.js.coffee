@@ -28,9 +28,16 @@ initialize = (position) ->
 
   setTimeout updateMap, 500
 
+  clean = ->
+    $('p.summary').text('')
+
+  google.maps.event.addListener map, 'dragstart', clean
   google.maps.event.addListener map, 'dragend', updateMap
   google.maps.event.addListener map, 'zoom_changed', updateMap
 
   update = (points) ->
+    console.log(points)
+    if points.summary isnt null
+      $('p.summary').text(points.summary)
 
 $(initialize)
