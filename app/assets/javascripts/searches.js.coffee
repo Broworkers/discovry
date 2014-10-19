@@ -53,7 +53,7 @@ initialize = (position) ->
           address = getCountry(results)
 
       update = (data) ->
-        $('div.info').html(data)
+        $('div.content').replaceWith(data)
 
       jQuery.get('/', place: address, update)
 

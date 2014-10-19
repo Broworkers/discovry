@@ -31,14 +31,16 @@
 // Content
 
 .content
+  +align-items(stretch)
+  +display(flex)
+  +flex-direction(row)
+  +justify-content(space-between)
   bottom: 0
   box-shadow: 0 -5px 5px rgba($black, .1)
   height: 300px
   +clearfix
 
   section
-    float: left
-    height: 100%
     padding: $buffer
 
     header.powered-by
@@ -50,8 +52,8 @@
 // Wikipedia
 
 section.wikipedia
+  min-width: 400px
   position: relative
-  width: 400px
 
   h1
     font-size: 1em
@@ -75,7 +77,6 @@ section.wikipedia
 // Flickr
 
 section.flickr
-  width: calc(100% - 400px)
 
   ul
     +align-content(stretch)

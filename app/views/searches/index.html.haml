@@ -1,9 +1,3 @@
 %div.map
 
-%div.content
-  = form_tag root_path, method: :get do
-    = text_field_tag :place
-    = submit_tag
-
-  %div.info
-    = render 'info'
+= render 'content'
