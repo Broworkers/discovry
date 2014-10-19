@@ -5,6 +5,7 @@
     %title Discovry
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&sensor=TRUE", "application"
+    = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
   %body
