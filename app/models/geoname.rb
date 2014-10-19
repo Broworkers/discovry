@@ -106,7 +106,7 @@ class Geoname < OpenStruct
     end
 
     def parse(data)
-      Geoname.new(data['geonames'].first)
+      Geoname.new(data['geonames'].sort { |d| d['rank'] }.first)
     end
 
     def url

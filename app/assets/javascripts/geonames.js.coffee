@@ -60,7 +60,7 @@ initialize = (position) ->
     renderFlickr(data)
     if data.wikipedia.summary isnt null
       $('.summary').text(data.wikipedia.summary)
-      link = $('<a>').attr('href', data.wikipedia.url).text(data.wikipedia.title)
+      link = $('<a>').attr(href: data.wikipedia.url, target: '_blank').text(data.wikipedia.title)
       $('.title').html(link)
 
 $(initialize)
