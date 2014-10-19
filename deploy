@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+env = File.read('.env').split().join(' ')
+
+# maintance mode
+system "heroku maintenance:on"
+
+# push code
+system "git push heroku master"
+
+# set vars
+system "heroku config:set #{env}"
+
+# maintance mode off
+system "heroku maintenance:off"

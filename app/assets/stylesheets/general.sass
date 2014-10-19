@@ -4,6 +4,18 @@ body
   font-family: $font
 
 
+// Spinner
+
+@import "spinner"
+
+.spinner
+  left: 50%
+  top: 50%
+  position: absolute
+  z-index: 600
+  +transform(translate(-50%, -50%))
+
+
 // Rails Rumble Badge
 
 .rails-rumble-badge
@@ -48,7 +60,7 @@ body
 
   // Spotlight
   &:before
-    +radial-gradient(200px at center, rgba($black, 0) 98px, rgba($black, .4) 100px, rgba($black, .3) 200px)
+    +radial-gradient(200px at 49.75% 50%, rgba($black, 0) 98px, rgba($black, .4) 100px, rgba($black, .3) 200px)
     bottom: 0
     content: ""
     left: 0
@@ -72,7 +84,9 @@ body
   +clearfix
 
   section
+    background-color: $white
     padding: $buffer
+    z-index: 700
 
     header.powered-by
       color: $gray
