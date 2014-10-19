@@ -1,3 +1,5 @@
+currentPosition = {}
+
 getType = (name) ->
   (results) ->
     for result in results
@@ -11,20 +13,26 @@ getRegion = getType('administrative_area_level_1')
 getCity = getType('administrative_area_level_2')
 getStreet = (results) ->
 
-initialize = ->
+
+getLocation = ->
+  navigator.geolocation.getCurrentPosition(initialize)
+
+initialize = (position) ->
   elem = $("div.map")[0]
 
   mapOptions =
-    center: new google.maps.LatLng(-34.397, 150.644)
+    center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
     mapTypeId: google.maps.MapTypeId.ROADMAP
     zoom: 8
 
   map = new google.maps.Map(elem, mapOptions)
   geocoder = new google.maps.Geocoder()
 
-  google.maps.event.addListener map, 'dragend', ->
+  updateMap = ->
     zoom = map.getZoom()
     curr = map.getCenter()
+    console.log(zoom)
+    console.log(curr)
 
     geocoder.geocode 'latLng': curr, (results, status) ->
       return if status isnt google.maps.GeocoderStatus.OK
@@ -50,5 +58,10 @@ initialize = ->
       jQuery.get('/', place: address, update)
 
 
+  do updateMap
+
+  google.maps.event.addListener map, 'dragend', ->
+    do updateMap
+
 $ ->
-  do initialize
+  do getLocation
