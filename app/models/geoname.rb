@@ -3,12 +3,12 @@ require 'ostruct'
 require 'rest-client'
 
 class Geoname < OpenStruct
+  USERNAME = ENV['GEONAMES_USERNAME']
   module ClassMethods
-    attr_accessor :username
     alias_method :configure, :tap
 
     def search(coords, zoom)
-      search = Search.prepare(username, coords, zoom)
+      search = Search.prepare(coords, zoom)
       search.execute
     end
   end
@@ -16,28 +16,26 @@ class Geoname < OpenStruct
   extend ClassMethods
 
   class Search
-    attr_accessor :username, :coords, :zoom
+    attr_accessor :coords, :zoom
 
-    def self.prepare(username, coords, zoom)
+    def self.prepare(coords, zoom)
       new.tap do |search|
-        search.username = username
         search.coords = coords
         search.zoom = zoom
       end
     end
 
     def execute
-      query = Query.prepare(username, coords, zoom)
+      query = Query.prepare(coords, zoom)
       query.execute
     end
   end
 
   class Query
-    attr_accessor :username, :coords, :zoom
+    attr_accessor :coords, :zoom
 
-    def self.prepare(username, coords, zoom)
+    def self.prepare(coords, zoom)
       new.tap do |query|
-        query.username = username
         query.coords= coords
         query.zoom = zoom
       end
@@ -50,9 +48,9 @@ class Geoname < OpenStruct
     def resolver
       case level
       when :wiki
-        Wiki.prepare(username, coords)
+        Wiki.prepare(coords)
       else
-        Point.prepare(username, coords, level)
+        Point.prepare(coords, level)
       end
     end
 
@@ -71,12 +69,11 @@ class Geoname < OpenStruct
   end
 
   class Fetcher
-    attr_accessor :username, :url, :query
+    attr_accessor :url, :query
 
-    def self.prepare(username, url, query)
+    def self.prepare(url, query)
       new.tap do |fetcher|
-        fetcher.username = username
-        fetcher.query= query
+        fetcher.query = query
         fetcher.url = url
       end
     end
@@ -86,22 +83,21 @@ class Geoname < OpenStruct
     end
 
     def params
-      { username: username }.merge(query)
+      { username: Geoname::USERNAME }.merge(query)
     end
   end
 
   class Wiki
-    attr_accessor :username, :coords
+    attr_accessor :coords
 
-    def self.prepare(username, coords)
+    def self.prepare(coords)
       new.tap do |query|
-        query.username = username
         query.coords= coords
       end
     end
 
     def execute
-      fetch = Fetcher.prepare(username, url, coords)
+      fetch = Fetcher.prepare(url, coords)
       parse fetch.execute
     end
 
@@ -115,24 +111,23 @@ class Geoname < OpenStruct
   end
 
   class Point
-    attr_accessor :username, :coords, :level
+    attr_accessor :coords, :level
 
-    def self.prepare(username, coords, level)
+    def self.prepare(coords, level)
       new.tap do |query|
-        query.username = username
         query.coords= coords
         query.level = level
       end
     end
 
     def execute
-      fetch = Fetcher.prepare(username, url, coords)
+      fetch = Fetcher.prepare(url, coords)
       parse fetch.execute
     end
 
     def parse(data)
       coords = {lat: data['geonames'][0]['lat'], lng: data['geonames'][0]['lng'] }
-      wiki = Wiki.prepare(username, coords)
+      wiki = Wiki.prepare(coords)
       wiki.execute
     end
 
