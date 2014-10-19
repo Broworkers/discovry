@@ -7,7 +7,6 @@ gem 'pg'
 gem 'haml-rails'
 gem 'sass-rails'
 gem 'bourbon'
-gem 'neat'
 gem 'normalize-rails'
 
 gem 'uglifier', '>= 1.3.0'
