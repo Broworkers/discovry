@@ -4,6 +4,7 @@ ruby '2.1.3'
 # Base
 gem 'rails', '4.1.1'
 gem 'pg'
+gem 'unicorn'
 
 # DOM
 gem 'jbuilder'
