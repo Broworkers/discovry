@@ -1,6 +1,9 @@
 class GeonamesController < ApplicationController
   def show
-    @geoname = Geoname.search(coords, zoom) if coords.any?
+    if coords.any?
+      @geoname = Geoname.search(coords, zoom)
+      @photos  = FlickrSearch.get_photos(@geoname.title)
+    end
   end
 
   private

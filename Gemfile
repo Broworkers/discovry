@@ -30,5 +30,3 @@ group :development do
   # Debug
   gem 'pry'
 end
-
-gem 'spring', group: :development
