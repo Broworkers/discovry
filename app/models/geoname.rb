@@ -2,16 +2,22 @@ require 'json'
 require 'ostruct'
 require 'rest-client'
 require 'forwardable'
+require 'singleton'
 
 class Geoname < OpenStruct
   URL = "http://api.geonames.org/searchJSON"
 
-  def self.configure(username)
-    @username = username
+  def self.configure(&block)
+    Config.instance.tap(&block)
   end
 
   def self.search(coords, zoom)
-    Query.prepare(@username, coords, zoom)
+    Query.prepare(Config.instance, coords, zoom)
+  end
+
+  class Config
+    include Singleton
+    attr_accessor :username
   end
 
   class Query
@@ -19,9 +25,9 @@ class Geoname < OpenStruct
     attr_accessor :username, :coords, :zoom, :results
     delegate [:map, :each, :any?] => :execute
 
-    def self.prepare(username, coords, zoom)
+    def self.prepare(config, coords, zoom)
       new.tap do |query|
-        query.username = username
+        query.username = config.username
         query.coords = coords
         query.zoom = zoom
       end
@@ -47,9 +53,9 @@ class Geoname < OpenStruct
     def level
       case
       when zoom > 10
-        'adm1'
-      when zoom > 5
         'adm2'
+      when zoom > 5
+        'adm1'
       else
         'pcli'
       end
