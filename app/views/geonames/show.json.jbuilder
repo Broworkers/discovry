@@ -1,1 +1,1 @@
-json.array! @geonames, :name, :lat, :lng, :population
+json.(@geoname, :summary)

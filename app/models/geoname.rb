@@ -1,64 +1,158 @@
 require 'json'
 require 'ostruct'
 require 'rest-client'
-require 'forwardable'
-require 'singleton'
 
 class Geoname < OpenStruct
-  URL = "http://api.geonames.org/searchJSON"
-
-  def self.configure(&block)
-    Config.instance.tap(&block)
-  end
-
-  def self.search(coords, zoom)
-    Query.prepare(Config.instance, coords, zoom)
-  end
-
-  class Config
-    include Singleton
+  module ClassMethods
     attr_accessor :username
+    alias_method :configure, :tap
+
+    def search(coords, zoom)
+      search = Search.prepare(username, coords, zoom)
+      search.execute
+    end
+  end
+
+  extend ClassMethods
+
+  class Search
+    attr_accessor :username, :coords, :zoom
+
+    def self.prepare(username, coords, zoom)
+      new.tap do |search|
+        search.username = username
+        search.coords = coords
+        search.zoom = zoom
+      end
+    end
+
+    def execute
+      query = Query.prepare(username, coords, zoom)
+      query.execute
+    end
   end
 
   class Query
-    extend Forwardable
-    attr_accessor :username, :coords, :zoom, :results
-    delegate [:map, :each, :any?] => :execute
+    attr_accessor :username, :coords, :zoom
 
-    def self.prepare(config, coords, zoom)
+    def self.prepare(username, coords, zoom)
       new.tap do |query|
-        query.username = config.username
-        query.coords = coords
+        query.username = username
+        query.coords= coords
         query.zoom = zoom
       end
     end
 
-    private
     def execute
-      @results ||= raw.collect { |data| Geoname.new(data) }
+      resolver.execute
     end
 
-    def raw
-      RestClient.get(url, params: params) { |data| JSON[data]['geonames'] }
-    end
-
-    def params
-      { username: username, featureCode: level }.merge(coords)
-    end
-
-    def url
-      Geoname::URL
+    def resolver
+      case level
+      when :wiki
+        Wiki.prepare(username, coords)
+      else
+        Point.prepare(username, coords, level)
+      end
     end
 
     def level
       case
+      when zoom > 15
+        :wiki
       when zoom > 10
-        'adm2'
-      when zoom > 5
-        'adm1'
+        :locality
+      when zoom > 6
+        :region
       else
-        'pcli'
+        :country
       end
+    end
+  end
+
+  class Fetcher
+    attr_accessor :username, :url, :query
+
+    def self.prepare(username, url, query)
+      new.tap do |fetcher|
+        fetcher.username = username
+        fetcher.query= query
+        fetcher.url = url
+      end
+    end
+
+    def execute
+      RestClient.get(url, params: params) { |data| JSON[data] }
+    end
+
+    def params
+      { username: username }.merge(query)
+    end
+  end
+
+  class Wiki
+    attr_accessor :username, :coords
+
+    def self.prepare(username, coords)
+      new.tap do |query|
+        query.username = username
+        query.coords= coords
+      end
+    end
+
+    def execute
+      fetch = Fetcher.prepare(username, url, coords)
+      parse fetch.execute
+    end
+
+    def parse(data)
+      Geoname.new(data['geonames'].first)
+    end
+
+    def url
+      "api.geonames.org/findNearbyWikipediaJSON"
+    end
+  end
+
+  class Point
+    attr_accessor :username, :coords, :level
+
+    def self.prepare(username, coords, level)
+      new.tap do |query|
+        query.username = username
+        query.coords= coords
+        query.level = level
+      end
+    end
+
+    def execute
+      fetch = Fetcher.prepare(username, url, coords)
+      parse fetch.execute
+    end
+
+    def parse(data)
+      coords = {lat: data['geonames'][0]['lat'], lng: data['geonames'][0]['lng'] }
+      wiki = Wiki.prepare(username, coords)
+      wiki.execute
+    end
+
+    def params
+      feature(zoom).merge(coords)
+    end
+
+    def feature
+      case level
+      when :locality
+        { featureCode: 'ADM2' }
+      when :region
+        { featureCode: 'ADM1' }
+      when :country
+        { featureCode: 'PCLI' }
+      end
+    end
+
+    def url
+      "api.geonames.org/findNearbyJSON"
     end
   end
 end

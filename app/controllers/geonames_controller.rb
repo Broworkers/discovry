@@ -1,11 +1,11 @@
 class GeonamesController < ApplicationController
   def show
-    @geonames = Geoname.search(coords, zoom) if coords.any?
+    @geoname = Geoname.search(coords, zoom) if coords.any?
   end
 
   private
   def coords
-    params.select { |k,*| k =~ /north|west|south|east/ }
+    params.select { |k,*| k =~ /lat|lng/ }
   end
 
   def zoom
