@@ -1,14 +1,14 @@
 %div.content
 
-  %section.wikipedia
-    %header.powered-by Wikipedia
-    - if @article && @article.available?
+  - if @article && @article.available?
+    %section.wikipedia
+      %header.powered-by Wikipedia
       %h1= link_to @article.title, @article.url, target: '_blank'
       = raw @article.summary
 
-  %section.flickr
-    %header.powered-by Flickr
-    - if @photos
+  - if @photos
+    %section.flickr
+      %header.powered-by Flickr
       %ul.photos
         - @photos.each do |thumb, url|
           %li
