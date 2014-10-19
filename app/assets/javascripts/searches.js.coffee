@@ -1,5 +1,3 @@
-currentPosition = {}
-
 getType = (name) ->
   (results) ->
     for result in results
@@ -31,8 +29,6 @@ initialize = (position) ->
   updateMap = ->
     zoom = map.getZoom()
     curr = map.getCenter()
-    console.log(zoom)
-    console.log(curr)
 
     geocoder.geocode 'latLng': curr, (results, status) ->
       return if status isnt google.maps.GeocoderStatus.OK
