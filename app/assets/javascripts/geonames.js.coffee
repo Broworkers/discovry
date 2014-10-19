@@ -21,7 +21,7 @@ initialize = (position) ->
       url: '/'
       success: update
       data:
-        format: 'json'
+        format: 'html'
         zoom: zoom
         lat: lat
         lng: lng
@@ -31,6 +31,7 @@ initialize = (position) ->
   google.maps.event.addListener map, 'dragend', updateMap
   google.maps.event.addListener map, 'zoom_changed', updateMap
 
-  update = (points) ->
+  update = (data) ->
+    $('div.content').replaceWith(data)
 
 $(initialize)
