@@ -1,3 +1,16 @@
+// Header
+
+.site-top
+
+  .logo
+    left: 50%
+    margin-left: -113px
+    position: absolute
+    pointer-events: none
+    top: $buffer
+    z-index: 200
+
+
 // Main elements
 
 .map,
@@ -58,6 +71,15 @@ section.wikipedia
   h1
     font-size: 1em
 
+    a
+      border-bottom: 1px solid $gray
+      color: $black
+      text-decoration: none
+
+      &:hover,
+      &:focus
+        border-color: $black
+
   p
     font-size: .9em
 
@@ -72,6 +94,9 @@ section.wikipedia
       pointer-events: none
       position: absolute
       right: 0
+
+  b
+    font-weight: 400
 
 
 // Flickr
