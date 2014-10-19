@@ -28,12 +28,6 @@ initialize = (position) ->
 
   setTimeout updateMap, 500
 
-  clean = ->
-    $('.summary').html('')
-    $('.title').html('')
-    $('.photos').html('')
-
-  google.maps.event.addListener map, 'dragstart', clean
   google.maps.event.addListener map, 'dragend', updateMap
   google.maps.event.addListener map, 'zoom_changed', updateMap
 
