@@ -4,16 +4,28 @@ body
   font-family: $font
 
 
+// Rails Rumble Badge
+
+.rails-rumble-badge
+  position: absolute
+  right: $buffer
+  top: $buffer
+  z-index: 300
+
+  img
+    height: 50px
+
+
 // Header
 
 .site-top
 
   .logo
     left: 50%
-    margin-left: -113px
+    margin-left: -93px
     position: absolute
     pointer-events: none
-    top: $buffer
+    top: 0
     z-index: 200
 
 
@@ -31,12 +43,16 @@ body
 
 .map
   background-color: $light
+<<<<<<< HEAD
   bottom: 0px
+=======
+  bottom: 284px
+>>>>>>> origin/master
   top: 0
 
   // Spotlight
   &:before
-    +radial-gradient(200px at 50% 50%, rgba($black, 0) 97px, rgba($black, .2) 99px, rgba($black, .1) 200px)
+    +radial-gradient(200px at 49.75% 50%, rgba($black, 0) 98px, rgba($black, .4) 100px, rgba($black, .3) 200px)
     bottom: 0
     content: ""
     left: 0
@@ -56,11 +72,13 @@ body
   +justify-content(space-between)
   bottom: 0
   box-shadow: 0 -5px 5px rgba($black, .1)
-  height: 300px
+  height: 284px
   +clearfix
 
   section
+    background-color: $white
     padding: $buffer
+    z-index: 700
 
     header.powered-by
       color: $gray
