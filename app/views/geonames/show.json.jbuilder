@@ -1,7 +1,7 @@
 json.wikipedia do |wiki|
   wiki.summary @geoname.summary
   wiki.title @geoname.title
-  wiki.url @geoname.wikipediaUrl
+  wiki.url "http://#{@geoname.wikipediaUrl}"
 end
 
 json.photos do
