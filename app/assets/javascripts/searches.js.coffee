@@ -11,11 +11,7 @@ getRegion = getType('administrative_area_level_1')
 getCity = getType('administrative_area_level_2')
 getStreet = (results) ->
 
-
-getLocation = ->
-  navigator.geolocation.getCurrentPosition(initialize)
-
-initialize = (position) ->
+initialize = ->
   elem = $("div.map")[0]
 
   mapOptions =
@@ -24,7 +20,7 @@ initialize = (position) ->
     streetViewControl: false
     panControl: false
     scrollwheel: false
-    center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+    center: new google.maps.LatLng(-23.554113,-46.641769)
     mapTypeId: google.maps.MapTypeId.ROADMAP
     zoom: 8
 
@@ -65,4 +61,4 @@ initialize = (position) ->
     do updateMap
 
 $ ->
-  do getLocation
+  do initialize
