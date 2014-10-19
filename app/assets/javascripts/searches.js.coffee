@@ -19,6 +19,9 @@ initialize = (position) ->
   elem = $("div.map")[0]
 
   mapOptions =
+    mapTypeControl: false
+    zoomControl: false
+    streetViewControl: false
     center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
     mapTypeId: google.maps.MapTypeId.ROADMAP
     zoom: 8
